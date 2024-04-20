@@ -1,0 +1,8 @@
+dash
+requests
+black
+flake8
+mypy
+isort
+pytest
+pandas

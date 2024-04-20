@@ -85,12 +85,17 @@ def update_chart(selected_user_id, selected_type):
                 "x": dates,
                 "y": values,
                 "type": "line",
-                "name": f'{selected_type.capitalize()} ({next(user["name"] for user in user_data if user["user_id"] == selected_user_id)})',  # noqa: E501
+                "name": f'{selected_type.capitalize()} ({next(user["name"] for user in user_data if user["user_id"] == selected_user_id)})',    # noqa: E501
             }
         ],
         "layout": {
-            "title": f'{selected_type.capitalize()} Over Time ({next(user["name"] for user in user_data if user["user_id"] == selected_user_id)})',  # noqa: E501
+            "title": f'{selected_type.capitalize()} Over Time ({next(user["name"] for user in user_data if user["user_id"] == selected_user_id)})', # noqa: E501
             "xaxis": {"title": "Date"},
             "yaxis": {"title": selected_type.capitalize()},
         },
     }
+
+# Run the Dash application
+if __name__ == '__main__':
+    app.run_server(debug=True)
+    

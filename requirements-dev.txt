@@ -6,3 +6,4 @@ mypy
 isort
 pytest
 pandas
+gunicorn

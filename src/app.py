@@ -35,42 +35,52 @@ def get_measurements(**kwags):
 app = dash.Dash(__name__)
 server = app.server
 
+# Colors
+primary_color = "#222831"
+secondary_color = "#393E46"
+third_color = "#00ADB5"
+text_color = "#EEEEEE"
+
 # Define layout of the application
 app.layout = html.Div(
-    [
-        html.H1("Wakacje sa"),
+    style={"backgroundColor": primary_color, "color": text_color, "padding": "20px", "fontFamily": "Arial, sans-serif"},
+    children=[
+        html.H1("Wakacje sa", style={"textAlign": "center", "marginBottom": "30px", "fontSize": "36px"}),
         html.Div(
-            [
-                html.H2(children="Add weight"),
-                html.Label("Select User:"),
-                dcc.Dropdown(id="user-dropdown-form"),
-                html.Label("Weight:"),
+            style={"backgroundColor": secondary_color, "padding": "30px", "marginBottom": "30px", "borderRadius": "10px"},
+            children=[
+                html.H2(children="Add weight", style={"color": text_color, "marginBottom": "20px", "fontSize": "24px"}),
+                html.Label("Select User:", style={"fontSize": "16px"}),
+                dcc.Dropdown(id="user-dropdown-form", style={"width": "100%", "marginBottom": "20px"}),
+                html.Label("Weight:", style={"fontSize": "16px"}),
                 dcc.Input(
-                    id="measurment-value",
+                    id="measurement-value",
                     type="number",
                     placeholder="ile tam na wadze byczqu ?",
+                    style={"width": "100%", "marginBottom": "20px"},
                 ),
-                html.Label("Date:"),
+                html.Label("Date:", style={"fontSize": "16px"}),
                 dcc.DatePickerSingle(
-                    id="date-picker", date=datetime.today(), display_format="YYYY-MM-DD"
+                    id="date-picker", date=datetime.today(), display_format="YYYY-MM-DD", style={"width": "100%", "marginBottom": "20px"}
                 ),
-                html.Button("Submit", id="submit-button-form", n_clicks=0),
+                html.Button("Submit", id="submit-button-form", n_clicks=0, style={"backgroundColor": third_color, "color": text_color, "fontSize": "16px", "padding": "10px 20px", "borderRadius": "5px", "border": "none", "cursor": "pointer", "width": "100%"}),
                 dcc.Interval(
                     id="interval-component-form", interval=30000, n_intervals=1
                 ),
-                html.Div(id="output-message-form"),
-            ]
+                html.Div(id="output-message-form", style={"marginTop": "20px", "fontSize": "16px"}),
+            ],
         ),
         html.Div(
-            [
-                html.H2(children="Weight Over Time"),
-                html.Label("Select User:"),
-                dcc.Dropdown(id="user-dropdown", value=1),
-                html.Label("Select Type:"),
-                dcc.Dropdown(id="type-dropdown", value="weight"),
+            style={"backgroundColor": secondary_color, "padding": "30px", "marginBottom": "30px", "borderRadius": "10px"},
+            children=[
+                html.H2(children="Weight Over Time", style={"color": text_color, "marginBottom": "20px", "fontSize": "24px"}),
+                html.Label("Select User:", style={"fontSize": "16px"}),
+                dcc.Dropdown(id="user-dropdown", value=1, style={"width": "100%", "marginBottom": "20px"}),
+                html.Label("Select Type:", style={"fontSize": "16px"}),
+                dcc.Dropdown(id="type-dropdown", value="weight", style={"width": "100%", "marginBottom": "20px"}),
                 dcc.Graph(id="measurement-chart"),
                 dcc.Interval(id="interval-component", interval=30000, n_intervals=1),
-            ]
+            ],
         ),
     ]
 )
@@ -80,7 +90,7 @@ app.layout = html.Div(
     Output("output-message-form", "children"),
     Input("submit-button-form", "n_clicks"),
     [
-        State("measurment-value", "value"),
+        State("measurement-value", "value"),
         State("date-picker", "date"),
         State("user-dropdown-form", "value"),
     ],

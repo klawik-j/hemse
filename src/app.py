@@ -207,6 +207,8 @@ app.layout = html.Div(
     ],
 )
 
+# ------------- HEATMAP -------------
+
 
 @app.callback(
     Output("heatmap", "figure"),
@@ -310,7 +312,7 @@ def update_users_dropdown_activities(n_intervals):
     ]
 
 
-# ----------------------------
+# ------------- Measurements Form -------------
 
 
 @app.callback(
@@ -363,7 +365,7 @@ def update_users_dropdown_form(n_intervals):
     ]
 
 
-# ----------------------------------------
+# ------------- Weight over time -------------
 
 
 @app.callback(
@@ -409,11 +411,6 @@ def update_chart(selected_user_id, selected_type, n_intervals):
                 "name": f"{selected_type.capitalize()} ({user_name})",
             }
         ],
-        "layout": {
-            "title": f"{selected_type.capitalize()} Over Time ({user_name})",
-            "xaxis": {"title": "Date"},
-            "yaxis": {"title": selected_type.capitalize()},
-        },
     }
 
 

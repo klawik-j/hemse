@@ -1,7 +1,9 @@
 from datetime import datetime
+
 import dash
-from dash import html, dcc, callback, Input, Output
 import dash_bootstrap_components as dbc
+from dash import dcc, html
+
 from src.common.color import Color
 
 dash.register_page(__name__)
@@ -15,7 +17,6 @@ user_input = html.Div(
             style={"background-color": Color.primary, "color": Color.text},
         ),
     ],
-    className="mb-3",
 )
 weight_input = html.Div(
     children=[
@@ -25,10 +26,14 @@ weight_input = html.Div(
             type="number",
             min=0,
             placeholder="kg",
-            style={"background-color": Color.primary, "color": Color.text},
+            style={
+                "background-color": Color.primary,
+                "color": Color.text,
+                "-moz-appearance": "textfield",
+                "appearance": "textfield",
+            },
         ),
     ],
-    className="mb-3",
 )
 date_input = html.Div(
     children=[
@@ -38,7 +43,6 @@ date_input = html.Div(
             display_format="YYYY-MM-DD",
         ),
     ],
-    className="mb-3",
 )
 return_info = dbc.Toast(
     "",
@@ -49,36 +53,45 @@ return_info = dbc.Toast(
     style={"position": "fixed", "top": 66, "right": 10, "width": 350},
 )
 
-form = dbc.Form(
+form = dbc.Card(
     [
+        dbc.Row(user_input, className="mb-3"),
+        dbc.Row(weight_input, className="mb-3"),
         dbc.Row(
             [
-                dbc.Col(user_input, className="me-3", width="auto"),
-                dbc.Col(weight_input, className="me-3", width="auto"),
-            ],
-            className="g-2",
-        ),
-        dbc.Row(
-            [
-                dbc.Col(date_input, className="me-3", width="auto"),
+                dbc.Col(
+                    date_input,
+                ),
                 dbc.Col(
                     dbc.Button(
                         "Submit", id="submit-button-weight-form", color="primary"
                     ),
-                    width="auto",
                 ),
             ],
             className="g-2",
         ),
     ],
-)
-
-layout = html.Div(
-    children=[form, return_info],
     style={
         "background-color": Color.secondary,
         "border-radius": "10px",
         "padding": "20px",
     },
-    className="col-md-3 mx-auto my-4 mt-4",
+    body=True,
+)
+
+layout = html.Div(
+    children=[
+        dbc.Container(
+            [
+                dbc.Row(
+                    [
+                        dbc.Col(form, md=3),
+                    ],
+                    align="center",
+                ),
+            ],
+            fluid=True,
+        ),
+        return_info,
+    ],
 )

@@ -1,7 +1,9 @@
 from datetime import datetime
+
 import dash
-from dash import html, dcc, callback, Input, Output
 import dash_bootstrap_components as dbc
+from dash import dcc, html
+
 from src.common.color import Color
 
 dash.register_page(__name__)
@@ -27,17 +29,17 @@ date_input = html.Div(
 )
 return_info = dbc.Toast(
     "",
-    id="output-message-weight-form",
+    id="output-message-activity-form",
     is_open=False,
     dismissable=True,
     duration=2000,
+    style={"position": "fixed", "top": 66, "right": 10, "width": 350},
 )
 activity_type_input = html.Div(
     children=[
         dbc.Label("type"),
         dbc.Select(
             id="select-activity-type",
-            value=1,
             options=[
                 "running",
                 "swimming",
@@ -60,7 +62,12 @@ value_type_input = html.Div(
                     type="number",
                     min=0,
                     value=0,
-                    style={"background-color": Color.primary, "color": Color.text, "-moz-appearance": "textfield", "appearance": "textfield"},
+                    style={
+                        "background-color": Color.primary,
+                        "color": Color.text,
+                        "-moz-appearance": "textfield",
+                        "appearance": "textfield",
+                    },
                 ),
             ],
         ),
@@ -77,7 +84,12 @@ duration_type_input = html.Div(
                     type="number",
                     min=0,
                     value=30,
-                    style={"background-color": Color.primary, "color": Color.text, "-moz-appearance": "textfield", "appearance": "textfield"},
+                    style={
+                        "background-color": Color.primary,
+                        "color": Color.text,
+                        "-moz-appearance": "textfield",
+                        "appearance": "textfield",
+                    },
                 ),
                 dbc.InputGroupText("s"),
                 dbc.Input(
@@ -86,7 +98,12 @@ duration_type_input = html.Div(
                     min=0,
                     max=60,
                     value=0,
-                    style={"background-color": Color.primary, "color": Color.text, "-moz-appearance": "textfield", "appearance": "textfield"},
+                    style={
+                        "background-color": Color.primary,
+                        "color": Color.text,
+                        "-moz-appearance": "textfield",
+                        "appearance": "textfield",
+                    },
                 ),
             ],
         ),

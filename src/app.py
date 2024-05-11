@@ -3,12 +3,10 @@ import os
 from datetime import datetime
 
 import dash
-import dash_daq as daq
-import plotly.graph_objects as go
+import dash_bootstrap_components as dbc
 import requests
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
-import dash_bootstrap_components as dbc
 
 
 def get_users(**kwargs):
@@ -130,6 +128,57 @@ def measurement_form(n_clicks, measurment_value, date_picker, user_dropdown_form
     headers = {"accept": "application/json", "Content-Type": "application/json"}
     response = requests.post(url, data=data, headers=headers)
     response.raise_for_status()
+    if response.status_code == 200:
+        return ["Created !", True, "success"]
+    else:
+        return ["Failure", True, "danger"]
+
+
+@app.callback(
+    Output("output-message-activity-form", "children"),
+    Output("output-message-activity-form", "is_open"),
+    Output("output-message-activity-form", "icon"),
+    Input("submit-button-activity-form", "n_clicks"),
+    [
+        State("date-picker", "date"),
+        State("select-user", "value"),
+        State("select-activity-type", "value"),
+        State("activity-value", "value"),
+        State("activity-duration-min", "value"),
+        State("activity-duration-s", "value"),
+    ],
+)
+def activity_form(
+    n_clicks,
+    date_picker,
+    user_dropdown_form,
+    select_activity_type,
+    activity_value,
+    activity_duration_min,
+    activity_duration_s,
+):
+    if (
+        select_activity_type is None
+        or date_picker is None
+        or user_dropdown_form is None
+        or activity_value is None
+        or activity_duration_min is None
+        or activity_duration_s is None
+        or n_clicks is None
+    ):
+        return ""
+    url = os.environ["BACKEND_URL"] + "/api/activities/"
+    data = json.dumps(
+        {
+            "type": select_activity_type,
+            "value": activity_value,
+            "duration": f"PT{activity_duration_min}M{activity_duration_s}S",
+            "user_id": user_dropdown_form,
+            "created_at": date_picker,
+        }
+    )
+    headers = {"accept": "application/json", "Content-Type": "application/json"}
+    response = requests.post(url, data=data, headers=headers)
     if response.status_code == 200:
         return ["Created !", True, "success"]
     else:

@@ -2,7 +2,7 @@ from datetime import datetime
 import dash
 from dash import html, dcc, callback, Input, Output
 import dash_bootstrap_components as dbc
-from common.color import Color
+from src.common.color import Color
 
 dash.register_page(__name__)
 

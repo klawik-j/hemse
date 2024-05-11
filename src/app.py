@@ -131,9 +131,9 @@ def measurement_form(n_clicks, measurment_value, date_picker, user_dropdown_form
     response = requests.post(url, data=data, headers=headers)
     response.raise_for_status()
     if response.status_code == 200:
-        return ("Created !", True, "success")
+        return ["Created !", True, "success"]
     else:
-        return ("Failure", True, "danger")
+        return ["Failure", True, "danger"]
 
 
 # Run the Dash application

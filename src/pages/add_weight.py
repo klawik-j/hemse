@@ -24,7 +24,7 @@ weight_input = html.Div(
             id="weight-value",
             type="number",
             min=0,
-            placeholder="weight",
+            placeholder="kg",
             style={"background-color": Color.primary, "color": Color.text},
         ),
     ],
@@ -41,12 +41,11 @@ date_input = html.Div(
     className="mb-3",
 )
 return_info = dbc.Toast(
-    "This toast is placed in the top right",
+    "",
     id="output-message-weight-form",
     is_open=False,
     dismissable=True,
     duration=2000,
-    # top: 66 positions the toast below the navbar
     style={"position": "fixed", "top": 66, "right": 10, "width": 350},
 )
 
@@ -81,5 +80,5 @@ layout = html.Div(
         "border-radius": "10px",
         "padding": "20px",
     },
-    className="col-md-6 mx-auto my-4 mt-4",
+    className="col-md-3 mx-auto my-4 mt-4",
 )

@@ -8,3 +8,4 @@ pytest
 pandas
 gunicorn
 dash_daq
+dash-bootstrap-components

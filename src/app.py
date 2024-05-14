@@ -185,6 +185,35 @@ def activity_form(
         return ["Failure", True, "danger"]
 
 
+@app.callback(
+    Output("measurement-chart", "figure"),
+    [
+        Input("select-user", "value"),
+        Input("interval-component", "n_intervals"),
+    ],
+)
+def update_chart(selected_user_id, n_intervals):
+    measurements = get_measurements(user_id=selected_user_id, type="weight")
+    dates = [measurement["created_at"] for measurement in measurements]
+    values = [measurement["value"] for measurement in measurements]
+    return {
+        "data": [
+            {
+                "x": dates,
+                "y": values,
+                "type": "line",
+            }
+        ],
+        "layout": {
+            "margin": dict(l=20, r=20, t=20, b=20),
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(0,0,0,0)",
+            "font": {"color": "white"},
+            "autosize": True,
+        },
+    }
+
+
 # Run the Dash application
 if __name__ == "__main__":
     app.run_server(debug=True)

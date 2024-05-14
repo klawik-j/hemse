@@ -4,9 +4,12 @@ from datetime import datetime
 
 import dash
 import dash_bootstrap_components as dbc
+import plotly.graph_objs as go
 import requests
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
+
+from src.common.color import Color
 
 
 def get_users(**kwargs):
@@ -212,6 +215,76 @@ def update_chart(selected_user_id, n_intervals):
             "autosize": True,
         },
     }
+
+
+@app.callback(
+    Output("heatmap", "figure"),
+    [
+        Input("select-user", "value"),
+        Input("interval-component", "n_intervals"),
+    ],
+)
+def update_heatmap_data(user_id, n_intervals):
+    activities = get_activities(user_id=user_id)
+
+    current_year = datetime.now().year
+    current_week = datetime.now().isocalendar().week
+    weeks = range(1, current_week + 1)
+
+    days_of_week = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+    ]
+    matrix = [[0] * 7 for _ in weeks]
+    for activity in activities:
+        date = activity["created_at"]
+        if date.year != current_year:
+            break
+        week = date.isocalendar().week - 1
+        day_of_week = date.weekday()
+        matrix[week][day_of_week] += 1
+
+    figure = go.Figure(
+        data=[
+            go.Heatmap(
+                z=matrix,
+                y=[f"week {i}" for i in weeks],
+                x=days_of_week,
+                colorscale=[[0, "rgba(0,0,0,0)"], [1, Color.third]],
+                hoverongaps=False,
+                showlegend=False,
+                showscale=False,
+                zauto=False,
+                zmax=2,
+                zmin=0,
+            )
+        ],
+        layout=go.Layout(
+            yaxis=dict(scaleanchor="x", gridcolor="rgba(0, 0, 0, 0)"),
+            xaxis=dict(gridcolor="rgba(0, 0, 0, 0)"),
+            margin=dict(l=20, r=20, t=20, b=20),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font={"color": "white"},
+        ),
+    )
+    return figure
+
+
+@app.callback(
+    Output("activity-counter", "value"),
+    [
+        Input("select-user", "value"),
+        Input("interval-component", "n_intervals"),
+    ],
+)
+def update_activity_counter(user_id, n_clicks):
+    return len(get_activities(user_id=user_id))
 
 
 # Run the Dash application

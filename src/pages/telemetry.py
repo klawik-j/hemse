@@ -26,7 +26,7 @@ form = dbc.Card(
     style={
         "background-color": Color.secondary,
         "border-radius": "10px",
-        "padding": "20px",
+        "padding": "2px",
     },
     body=True,
 )
@@ -37,7 +37,11 @@ weight_graph = dbc.Card(
             dcc.Graph(
                 id="measurement-chart",
                 style={"background-color": Color.primary, "color": Color.text},
-                config={"displayModeBar": False, "scrollZoom": False},
+                config={
+                    "displayModeBar": False,
+                    "scrollZoom": False,
+                    "staticPlot": True,
+                },
             ),
             className="mb-3",
         ),
@@ -45,7 +49,7 @@ weight_graph = dbc.Card(
     style={
         "background-color": Color.secondary,
         "border-radius": "10px",
-        "padding": "20px",
+        "padding": "2px",
     },
     body=True,
 )
@@ -58,9 +62,11 @@ activity_counter = dbc.Card(
                 value=0,
                 size=128,
                 color=Color.third,
-                backgroundColor=Color.secondary,
+                backgroundColor=Color.primary,
                 style={
                     "textAlign": "center",
+                    "background-color": Color.primary,
+                    "color": Color.text,
                 },
             ),
             className="mb-3",
@@ -69,7 +75,7 @@ activity_counter = dbc.Card(
     style={
         "background-color": Color.secondary,
         "border-radius": "10px",
-        "padding": "20px",
+        "padding": "2px",
     },
     body=True,
 )
@@ -81,15 +87,18 @@ activity_heatmap = dbc.Card(
             figure=go.Figure(),
             config={
                 "displayModeBar": False,
-                "scrollZoom": False,
-                "editable": False,
+                "staticPlot": True,
+            },
+            style={
+                "background-color": Color.primary,
+                "color": Color.text,
             },
         ),
     ],
     style={
         "background-color": Color.secondary,
         "border-radius": "10px",
-        "padding": "20px",
+        "padding": "2   px",
     },
     body=True,
 )

@@ -295,14 +295,14 @@ def update_heatmap_data(user_id, n_intervals):
 
 
 @app.callback(
-    Output("activity-counter", "value"),
+    Output("activity-counter", "children"),
     [
         Input("select-user", "value"),
         Input("interval-component", "n_intervals"),
     ],
 )
 def update_activity_counter(user_id, n_clicks):
-    return len(get_activities(user_id=user_id))
+    return [len(get_activities(user_id=user_id))]
 
 
 # Run the Dash application

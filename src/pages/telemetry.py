@@ -26,7 +26,7 @@ form = dbc.Card(
     style={
         "background-color": Color.secondary,
         "border-radius": "10px",
-        "padding": "2px",
+        "padding": "20px",
     },
     body=True,
 )
@@ -49,7 +49,7 @@ weight_graph = dbc.Card(
     style={
         "background-color": Color.secondary,
         "border-radius": "10px",
-        "padding": "2px",
+        "padding": "20px",
     },
     body=True,
 )
@@ -57,16 +57,14 @@ weight_graph = dbc.Card(
 activity_counter = dbc.Card(
     [
         dbc.Row(
-            daq.LEDDisplay(
+            html.Div(
                 id="activity-counter",
-                value=0,
-                size=128,
-                color=Color.third,
-                backgroundColor=Color.primary,
+                children=[],
                 style={
                     "textAlign": "center",
                     "background-color": Color.primary,
-                    "color": Color.text,
+                    "color": Color.third,
+                    "fontSize": "8em",
                 },
             ),
             className="mb-3",
@@ -75,7 +73,7 @@ activity_counter = dbc.Card(
     style={
         "background-color": Color.secondary,
         "border-radius": "10px",
-        "padding": "2px",
+        "padding": "20px",
     },
     body=True,
 )
@@ -98,7 +96,7 @@ activity_heatmap = dbc.Card(
     style={
         "background-color": Color.secondary,
         "border-radius": "10px",
-        "padding": "2   px",
+        "padding": "20px",
     },
     body=True,
 )

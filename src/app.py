@@ -69,19 +69,19 @@ navbar = dbc.NavbarSimple(
         ),
         dbc.NavItem(
             dbc.NavLink(
-                html.I(className="bi bi-person-lines-fill"),
+                ["add weight"],
                 href=dash.page_registry["pages.add_weight"]["path"],
             )
         ),
         dbc.NavItem(
             dbc.NavLink(
-                html.I(className="bi bi-activity"),
+                ["add activity"],
                 href=dash.page_registry["pages.add_activity"]["path"],
             )
         ),
         dbc.NavItem(
             dbc.NavLink(
-                html.I(className="bi bi-graph-up"),
+                ["telemetry"],
                 href=dash.page_registry["pages.telemetry"]["path"],
             )
         ),

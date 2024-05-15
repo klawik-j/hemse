@@ -271,13 +271,15 @@ def update_heatmap_data(user_id, n_intervals):
                 z=matrix,
                 y=[f"week {i}" for i in weeks],
                 x=days_of_week,
-                colorscale=[[0, "rgba(0,0,0,0)"], [1, Color.third]],
+                colorscale=[[0, Color.secondary], [1, Color.third]],
                 hoverongaps=False,
                 showlegend=False,
                 showscale=False,
                 zauto=False,
                 zmax=1,
                 zmin=0,
+                xgap=4,
+                ygap=4,
             )
         ],
         layout=go.Layout(

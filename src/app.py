@@ -50,7 +50,11 @@ def get_activities(**kwargs):
 
 
 # Define Dash application instance
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG], use_pages=True)
+app = dash.Dash(
+    __name__,
+    external_stylesheets=[dbc.themes.CYBORG, dbc.icons.BOOTSTRAP],
+    use_pages=True,
+)
 server = app.server
 
 
@@ -58,19 +62,31 @@ navbar = dbc.NavbarSimple(
     children=[
         dbc.NavItem(
             dbc.NavLink(
-                "add weight", href=dash.page_registry["pages.add_weight"]["path"]
+                html.I(className="bi bi-github"),
+                href="https://github.com/klawik-j/slite/",
+                target="_blank",
             )
         ),
         dbc.NavItem(
             dbc.NavLink(
-                "add activity", href=dash.page_registry["pages.add_activity"]["path"]
+                html.I(className="bi bi-person-lines-fill"),
+                href=dash.page_registry["pages.add_weight"]["path"],
             )
         ),
         dbc.NavItem(
-            dbc.NavLink("telemetry", href=dash.page_registry["pages.telemetry"]["path"])
+            dbc.NavLink(
+                html.I(className="bi bi-activity"),
+                href=dash.page_registry["pages.add_activity"]["path"],
+            )
+        ),
+        dbc.NavItem(
+            dbc.NavLink(
+                html.I(className="bi bi-graph-up"),
+                href=dash.page_registry["pages.telemetry"]["path"],
+            )
         ),
     ],
-    brand="JebacUlaneKurwy",
+    brand="slite",
     brand_href=dash.page_registry["pages.home"]["path"],
     color="primary",
     dark=True,

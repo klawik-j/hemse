@@ -260,7 +260,7 @@ def update_heatmap_data(user_id, n_intervals):
                 showlegend=False,
                 showscale=False,
                 zauto=False,
-                zmax=2,
+                zmax=1,
                 zmin=0,
             )
         ],

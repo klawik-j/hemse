@@ -60,8 +60,6 @@ activity_counter = dbc.Card(
                 color=Color.third,
                 backgroundColor=Color.secondary,
                 style={
-                    "width": "100%",
-                    "marginBottom": "0px",
                     "textAlign": "center",
                 },
             ),
@@ -108,12 +106,6 @@ layout = html.Div(
                 ),
                 dbc.Row(
                     [
-                        dbc.Col(weight_graph, md=8),
-                    ],
-                    align="center",
-                ),
-                dbc.Row(
-                    [
                         dbc.Col(activity_counter, md=3),
                     ],
                     align="center",
@@ -121,6 +113,12 @@ layout = html.Div(
                 dbc.Row(
                     [
                         dbc.Col(activity_heatmap, md=3),
+                    ],
+                    align="center",
+                ),
+                dbc.Row(
+                    [
+                        dbc.Col(weight_graph, md=8),
                     ],
                     align="center",
                 ),

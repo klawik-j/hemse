@@ -295,6 +295,44 @@ def update_heatmap_data(user_id, n_intervals):
 
 
 @app.callback(
+    Output("activity_type_pie_chart", "figure"),
+    [
+        Input("select-user", "value"),
+        Input("interval-component", "n_intervals"),
+    ],
+)
+def update_activity_type_pie_chart(user_id, n_intervals):
+    activities = get_activities(user_id=user_id)
+    data = {}
+    for activity in activities:
+        activity_type = activity["type"]
+        data[activity_type] = data.get(activity_type, 0) + 1
+    activity_types = list(data.keys())
+    activity_counts = [data[activity_type] for activity_type in activity_types]
+
+    figure = go.Figure(
+        data=[
+            go.Pie(
+                labels=activity_types,
+                values=activity_counts,
+                hole=0.4,
+                textinfo="label+value",
+                showlegend=False,
+                marker=dict(colors=Color.chart),
+            )
+        ],
+        layout=go.Layout(
+            margin=dict(l=20, r=20, t=20, b=20),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font={"color": "white"},
+        ),
+    )
+
+    return figure
+
+
+@app.callback(
     Output("activity-counter", "children"),
     [
         Input("select-user", "value"),

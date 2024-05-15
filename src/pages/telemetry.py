@@ -101,6 +101,29 @@ activity_heatmap = dbc.Card(
     body=True,
 )
 
+activity_type_pie_chart = dbc.Card(
+    [
+        dcc.Graph(
+            id="activity_type_pie_chart",
+            figure=go.Figure(),
+            config={
+                "displayModeBar": False,
+                "staticPlot": True,
+            },
+            style={
+                "background-color": Color.primary,
+                "color": Color.text,
+            },
+        ),
+    ],
+    style={
+        "background-color": Color.secondary,
+        "border-radius": "10px",
+        "padding": "20px",
+    },
+    body=True,
+)
+
 layout = html.Div(
     children=[
         dbc.Container(
@@ -120,6 +143,12 @@ layout = html.Div(
                 dbc.Row(
                     [
                         dbc.Col(activity_heatmap, md=3),
+                    ],
+                    align="center",
+                ),
+                dbc.Row(
+                    [
+                        dbc.Col(activity_type_pie_chart, md=3),
                     ],
                     align="center",
                 ),

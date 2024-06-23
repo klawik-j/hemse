@@ -9,7 +9,7 @@ import requests
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
 
-from src.common.color import Color
+from hemse.common.color import Color
 
 
 def get_users(**kwargs):

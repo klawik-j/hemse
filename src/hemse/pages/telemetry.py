@@ -4,7 +4,7 @@ import dash_daq as daq
 import plotly.graph_objs as go
 from dash import dcc, html
 
-from src.common.color import Color
+from hemse.common.color import Color
 
 dash.register_page(__name__)
 

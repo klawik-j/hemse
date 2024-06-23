@@ -2,15 +2,27 @@ name: CD
 
 on:
   push:
-    branches: [master]
-    paths:
-      - 'src/**'
-      - 'Dockerfile'
-      - 'requirements-dev.txt'
-      - '.github/workflows/cd.yml'
+    tags:
+      - v*
 
 jobs:
-  deploy  :
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare environment
+        run: |
+          pip install -r requirements-dev.txt
+          chmod +x ./scripts/*
+      - name: Release package pypi & docker hub
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          ./scripts/run_a_release.sh
+  deploy-prod:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

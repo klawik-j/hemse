@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=69.1", "wheel", "setuptools_scm>=8.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hemse"
+authors = [
+    { name="Jakub Klawikowski", email="klawik.j@gmail.com" }
+]
+requires-python = ">=3.10"
+dynamic = [
+    "version",
+    "readme",
+]
+dependencies = [
+    "dash==2.16.1",
+    "dash-bootstrap-components==1.6.0",
+    "dash-core-components==2.0.0",
+    "dash-html-components==2.0.0",
+    "dash-table==5.0.0",
+    "dash_daq==0.5.0",
+    "requests==2.31.0",
+    "pandas==2.2.2",
+    "gunicorn==22.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"]}
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+disallow_untyped_defs = true
+follow_imports = "skip"
+
+[tool.setuptools_scm]
+write_to = "src/hemse/version.py"
+
+[tool.coverage.run]
+source = ["hemse"]
+branch = true
+
+[tool.pydocstyle]
+convention = "pep257"

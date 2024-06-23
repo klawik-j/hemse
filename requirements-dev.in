@@ -1,0 +1,12 @@
+-r requirements.txt
+
+black
+mypy
+flake8
+isort
+pytest
+pytest-cov
+pydocstyle
+toml
+pip-tools>=7.0.0
+twine

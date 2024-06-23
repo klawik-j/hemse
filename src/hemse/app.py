@@ -63,7 +63,7 @@ navbar = dbc.NavbarSimple(
         dbc.NavItem(
             dbc.NavLink(
                 html.I(className="bi bi-github"),
-                href="https://github.com/klawik-j/slite/",
+                href="https://github.com/klawik-j/hemse/",
                 target="_blank",
             )
         ),
@@ -86,7 +86,7 @@ navbar = dbc.NavbarSimple(
             )
         ),
     ],
-    brand="slite",
+    brand="hemse",
     brand_href=dash.page_registry["pages.home"]["path"],
     color="primary",
     dark=True,

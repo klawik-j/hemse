@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir -r requirements-dev.txt
 
 COPY . .
 
-CMD gunicorn src.app:server --bind 0.0.0.0:$PORT
+CMD gunicorn src.hemse.app:server --bind 0.0.0.0:$PORT
